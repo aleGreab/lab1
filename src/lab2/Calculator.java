@@ -8,11 +8,8 @@ package lab2;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import static lab2.Fibonacci.generateFibonacci;
 
-/**
- *
- * @author alexb
- */
 public class Calculator {
     
     public static void main(String[] args) throws IOException
@@ -20,6 +17,8 @@ public class Calculator {
         System.out.println("Welcome to calculator. Select an option: 1. Add | 2.Substract | 3. Divide | 4. Multiply | 5. Modulo");
         
         System.out.println("Spreadsheet calculator. Select an option: 6. CellSum | 7. CellIncrement | 8.CellDecrement" );
+        
+        System.out.println("Fibonacci sequence. Option 9");
         
         String inputOption = ReadConsole();
         int option = Integer.parseInt(inputOption);
@@ -157,6 +156,22 @@ public class Calculator {
                 cellToDecrement.value = ReadConsole();
                 cellOperations.Decrement(cellToDecrement);
                 System.out.println("Decremented cell value: " + cellToDecrement.value);
+                break;
+                
+                // sirul lui Fibonacci 
+            case 9:
+                System.out.println("Enter the lenght of Fibonacci sequence: ");
+                String inputLenght = ReadConsole();
+                int lenght = Integer.parseInt(inputLenght);
+                
+                int [] fibonacciSequence = generateFibonacci(lenght);
+                System.out.println("Fibonacci sequence: ");
+                
+                // afisam sirul cu un spatiu intre elemente
+                for (int nr:fibonacciSequence){
+                    System.out.println(nr + " ");
+                }
+                
                 break;
         }  
     }

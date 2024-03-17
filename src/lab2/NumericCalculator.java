@@ -5,10 +5,6 @@
  */
 package lab2;
 
-/**
- *
- * @author alexb
- */
 public class NumericCalculator {    
     
     public double Sum(double n1, double n2)

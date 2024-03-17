@@ -5,10 +5,6 @@
  */
 package lab2;
 
-/**
- *
- * @author alexb
- */
 class Cell {
     String value;
 }
