@@ -6,7 +6,7 @@
 * Operatorii dintr-o sucursala pot fi de asemenea de doua tipuri: OpearatorFrontOffice si OperatorBackOffice. O sucursala are 
 * un operator back office si mai multi de tip front office.
 *Operatorii FrontOffice pot sa deschida, sa inchida, sa debiteze si sa crediteze sume in conturile bancare.
-*Operatorii BackOffice mai pot sa autorizeze si sa proceseze sumele din conturile colectoare indiciduale. Fiecare operator 
+*Operatorii BackOffice mai pot sa autorizeze si sa proceseze sumele din conturile colectoare individuale. Fiecare operator 
 * are un cont colector asociat.
 *Implementati in BankApp urmatoarele functionalitati:
     x 1. Angajarea unui operator intr-o sucursala
@@ -38,7 +38,6 @@ import java.io.InputStreamReader;
  *
  * @author alexandragreab
  */
-
 public class BankApp {
 
     /**
@@ -159,7 +158,34 @@ public class BankApp {
                     }
                 
                 }
-                break;               
+                break;  
+                
+                case 4:
+                // Deschiderea unui cont de business de catre un operator
+                
+                // creem o noua sucursala pe care o citim de la tastatura
+                int sucursala4 = Integer.parseInt(ReadConsole("Introdu nr pt sucursala: "));
+                
+                // creem o noua unitate bancara
+                Sucursala unitBancara = null;
+                // verificam daca sucursala introdusa de la tastatura e una din cele 2 existente 
+                // si o atribuim unitatii bancare noi
+                if(sucursala4 == 1)
+                    unitBancara = sucursala1;
+                else if (sucursala4 == 2)
+                    unitBancara = sucursala2;
+                
+                // creem un nou operator pt frontOffice
+                Operator operator4 = unitBancara.assignOperatorFrontOfficeForTask();
+                
+                // citim de la tastatura detaliile noului client pt contul de business
+                String numeTitularContB = ReadConsole("Nume titular cont business: ");
+                String monedaContB = ReadConsole("Moneda pt cont business: ");
+                Double suma = Double.parseDouble(ReadConsole("Suma pt deschidere: "));
+                operator4.createBusinessAccount(numeTitularContB, monedaContB, suma);
+                
+                break;
+                
             case 7:
                 sucursala = Integer.parseInt(ReadConsole("Sucursala: "));
                 
@@ -196,4 +222,3 @@ public class BankApp {
     }  
     
 }
-

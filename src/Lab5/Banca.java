@@ -5,6 +5,7 @@
 package Lab5;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 /**
  *
@@ -51,4 +52,3 @@ public class Banca {
    }
   
 }
-

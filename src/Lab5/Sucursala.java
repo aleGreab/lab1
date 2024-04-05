@@ -62,4 +62,3 @@ public class Sucursala extends Banca
        return this.operatorBackOffice;
    }
 }
-

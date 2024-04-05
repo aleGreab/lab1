@@ -10,6 +10,7 @@ import java.util.ArrayList;
  *
  * @author alexandragreab
  */
+
 public class Operator {
     
     public String nume;
