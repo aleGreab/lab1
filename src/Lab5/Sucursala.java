@@ -19,6 +19,8 @@ public class Sucursala extends Banca
    private ArrayList<Operator> operatoriSucursala = new ArrayList<Operator>();
    
    private OperatorBackOffice operatorBackOffice = null;
+   
+   private OperatorFrontOffice operatorFront = null;
     
    public Sucursala(String numeEntitate, String numeBanca)
    {
@@ -42,6 +44,12 @@ public class Sucursala extends Banca
        return operatoriSucursala.get(index);
    }
    
+   public Operator assingOprBackOfficeForTask()
+   {
+       int ind = (new Random()).nextInt(operatoriSucursala.size());
+       return operatoriSucursala.get(ind);
+   }
+   
    public void SetOperatorbackOffice(Operator operator)
    {
        if (!operator.canDoBackOffice())
@@ -55,6 +63,36 @@ public class Sucursala extends Banca
        this.operatorBackOffice = (OperatorBackOffice)operator; //downcasting#
        
        operatoriSucursala.remove(operator);
+   }
+   
+   public void SetOperatorFrontOffice(Operator operator)
+   {
+       // verific daca operatorul poate face back office
+       if (operator.canDobackOffice)
+       {
+           System.out.println("Operatorul nu poate fi mutat in FrontOffice!");
+       }
+       else 
+       {
+            // verificam daca exista operatori back office in sucursala
+            if (operatorBackOffice != null)
+            {
+                // adaug operatorul in lista operatorilor
+                operatoriSucursala.add(operatorBackOffice);
+                // stergem operatorul 
+                //operatorBackOffice = null;
+                operatoriSucursala.remove(operator);
+            }
+            
+            // adaug operatorul in front office
+            operatoriSucursala.add(operator);
+       }
+       
+   }
+   
+   public Operator getOperatorFront()
+   {
+       return this.operatorFront;
    }
    
    public Operator getOperatorBackOffice()

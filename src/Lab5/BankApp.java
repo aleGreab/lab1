@@ -15,6 +15,7 @@
     4. Deschiderea unui cont de business de catre un operator
     5. Inchiderea unui cont de business de catre un operator
     6. Cautarea unui cont dupa iban si afisarea sumelor de pe credit si debit.
+
     x 7. Un operator poate fi intr-o zi operator front office iar in alta zi operator back office. Implementati un mecanism 
        de schimbare a tipului de operator din front desk in back office intr-o sucursala.
 
@@ -57,7 +58,7 @@ public class BankApp {
         sucursala1 = new Sucursala("S1", banca.numeBanca);
         sucursala1.setAdresa("Str. Memorandumului, Nr. 1");
         sucursala2 = new Sucursala("S2", banca.numeBanca);
-        sucursala2.setAdresa("Str. Busuresti, Nr.10");
+        sucursala2.setAdresa("Str. Bucuresti, Nr.10");
         
         System.out.println("Welcome to "+ banca.numeBanca + ". Adresa: " + banca.getSediu());
         
@@ -255,7 +256,7 @@ public class BankApp {
                 String findIban = ReadConsole("Introdu IBAN-ul pt cautare: ");
                 Account findAccount = op6.Find(findIban);
                 
-                // verificam daca contul a fost gasit
+                // verificam daca contul a fost gasit si afisam soldul
                 if (findAccount != null)
                 {
                     System.out.println("Contul a fost gasit!");
@@ -269,6 +270,8 @@ public class BankApp {
                 break;
                 
             case 7:
+            // Un operator poate fi intr-o zi operator front office iar in alta zi operator back office. 
+            //Implementati un mecanism de schimbare a tipului de operator din front desk in back office intr-o sucursala
                 sucursala = Integer.parseInt(ReadConsole("Sucursala: "));
                 
                 unitateBancara = null;
@@ -287,6 +290,33 @@ public class BankApp {
                 
                 if ( unitateBancara.getOperatorBackOffice() != null)
                     System.out.println("New backoffice operator is: " + unitateBancara.getOperatorBackOffice().nume);
+                
+                break;
+                
+            case 8:
+            // implementati un mecanism de schimbare a tipului de operator 
+            //din back office in front office intr-o sucursala
+                
+                sucursala = Integer.parseInt(ReadConsole("Introdu sucursala: "));
+                
+                unitateBancara = null;
+                if (sucursala == 1)
+                    unitateBancara = sucursala1;
+                else if (sucursala == 2)
+                    unitateBancara = sucursala2;
+                
+                if (unitateBancara.getOperatorFront() != null)
+                {
+                    System.out.println("Operatorul pe front office este: " + unitateBancara.getOperatorFront().nume);
+                }
+                
+                Operator oprBack = unitateBancara.assignOperatorFrontOfficeForTask();
+                
+                if (oprBack.canDoBackOffice())
+                    unitateBancara.SetOperatorFrontOffice(oprBack);
+                
+                if (unitateBancara.getOperatorFront() != null)
+                    System.out.println("Noul operator front office este: " + unitateBancara.getOperatorFront().nume);
                 
                 break;
         }
