@@ -186,6 +186,52 @@ public class BankApp {
                 
                 break;
                 
+            case 5:
+                // Inchidere cont de business
+                
+                // alegem una din cele 2 sucursale existente de la tastatura
+                sucursala = Integer.parseInt(ReadConsole("Introdu nr sucursalei: "));
+                
+                unitateBancara = null;
+                // verificam daca nr sucursalei pe care l-am introdus de la tastatura 
+                // coincide cu 1 sau 2 pt sucursalele existente si atribuim valoarea respectiva unitatii bancare
+                if (sucursala == 1)
+                    unitateBancara = sucursala1;
+                else if (sucursala == 2)
+                    unitateBancara = sucursala2;
+                
+                operatorAsignat = unitateBancara.assignOperatorFrontOfficeForTask();
+                
+                String Iban = ReadConsole("Introdu IBAN-ul contului pt stergere: ");
+                Account contStergere = operatorAsignat.Find(Iban);
+                
+                if (contStergere != null)
+                {
+                    operatorAsignat.Remove(contStergere);
+                    System.out.println("Cont sters cu succes!");
+                }
+                else
+                {
+                    System.out.println("Contul nu exista pt acest operator!");
+                    
+                    // cautam operatorul in intreaga lista a operatorilor existenti ai bancii
+                    for (Operator opr : banca.operatoriBanca)
+                    {
+                        contStergere = opr.Find(Iban);
+                        if (contStergere != null)
+                        {
+                            opr.Remove(contStergere);
+                            System.out.println("Cont sters cu succes!");
+                        }
+                        else
+                        {
+                            System.err.println("Contul nu a fost gasit!");
+                        }
+                    }
+                }
+                
+                break;    
+                
             case 7:
                 sucursala = Integer.parseInt(ReadConsole("Sucursala: "));
                 
