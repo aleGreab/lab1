@@ -17,6 +17,7 @@
     6. Cautarea unui cont dupa iban si afisarea sumelor de pe credit si debit.
     x 7. Un operator poate fi intr-o zi operator front office iar in alta zi operator back office. Implementati un mecanism 
        de schimbare a tipului de operator din front desk in back office intr-o sucursala.
+
     8. Implementati un mecanism 
        de schimbare a tipului de operator din back office in front office intr-o sucursala.
 
@@ -231,6 +232,41 @@ public class BankApp {
                 }
                 
                 break;    
+                
+            case 6:
+                // Cautare cont dupa iban
+                // citim de la tastatura sucursala unde vrem sa facem cautarea
+                
+                int sucursala6 = Integer.parseInt(ReadConsole("Introdu sucursala: "));
+                
+                // creem unitatea bancara
+                Sucursala unitBanc = null;
+                // verificam daca sucursala introdusa corespunde cu cele 2 existente
+                // si o atribuim unitatii bancare 
+                if (sucursala6 == 1)
+                    unitBanc = sucursala1;
+                else if (sucursala6 == 2)
+                    unitBanc = sucursala2;
+                
+                // cream un operator de frontOffice 
+                Operator op6 = unitBanc.assignOperatorFrontOfficeForTask();
+                
+                // citim de la tastatura contul de iban
+                String findIban = ReadConsole("Introdu IBAN-ul pt cautare: ");
+                Account findAccount = op6.Find(findIban);
+                
+                // verificam daca contul a fost gasit
+                if (findAccount != null)
+                {
+                    System.out.println("Contul a fost gasit!");
+                    System.out.println("Soldul contului este: " + findAccount.balance);
+                }
+                else 
+                {
+                    System.out.println("Contul nu a fost gasit");
+                }
+                
+                break;
                 
             case 7:
                 sucursala = Integer.parseInt(ReadConsole("Sucursala: "));

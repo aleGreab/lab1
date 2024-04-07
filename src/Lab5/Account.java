@@ -116,7 +116,6 @@ class PersonalAccount extends Account
     public PersonalAccount(String owner, String moneda)
     {
         super(owner, moneda);
-       
     }
 }
 
@@ -125,7 +124,5 @@ class BusinessAccount extends Account
     public BusinessAccount(String owner, String moneda)
     {
         super(owner, moneda);
-        
-        
     }
 }
